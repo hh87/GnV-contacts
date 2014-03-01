@@ -10,7 +10,7 @@
         android:layout_width="120dp"
         android:layout_height="fill_parent"
         android:cacheColorHint="#00000000"
-        android:divider="@drawable/mm_title_functionframe_line"
+        android:divider="@drawable/functionframe_line"
         android:listSelector="@drawable/title_list_selector"
         android:padding="3dp"
         android:scrollingCache="false" />

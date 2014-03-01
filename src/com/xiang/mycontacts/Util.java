@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 /**
- * @author yangyu
+ * @author 
  *	功能描述：常量工具类
  */
 public class Util {
@@ -37,4 +37,6 @@ public class Util {
 		final float scale = getScreenDensity(context);
 		return (int) (px * scale + 0.5);
 	}
+	
+	
 }

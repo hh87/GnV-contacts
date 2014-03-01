@@ -101,7 +101,7 @@ public class TitlePopup extends PopupWindow {
 	}
 	
 	/**
-	 * 显示弹窗列表界面
+	 * for menu
 	 */
 	public void show(View view){
 		//获得点击屏幕的位置坐标
@@ -118,7 +118,8 @@ public class TitlePopup extends PopupWindow {
 		//显示弹窗的位置
 		showAtLocation(view, popupGravity, mScreenWidth - LIST_PADDING - (getWidth()/2), mRect.bottom);
 	}
-	public void show(View view,boolean y){
+	//for item
+	public void show(View view,long y){
 		//获得点击屏幕的位置坐标
 		view.getLocationOnScreen(mLocation);
 		
@@ -131,7 +132,7 @@ public class TitlePopup extends PopupWindow {
 		}
 		
 		//显示弹窗的位置
-		showAtLocation(view, popupGravity, mScreenWidth - LIST_PADDING, mRect.centerY());
+		showAtLocation(view, popupGravity, mScreenWidth/3 , mRect.centerY());
 	}
 	
 	/**
