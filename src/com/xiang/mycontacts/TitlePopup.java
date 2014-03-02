@@ -18,72 +18,64 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 /**
- * @author yangyu
- *	功能描述：标题按钮上的弹窗（继承自PopupWindow）
+ * the popup menu class extends PopupWindow
+ * @author xiang
+ *	
  */
 public class TitlePopup extends PopupWindow {
 	private Context mContext;
 
-	//列表弹窗的间隔
+	//padding between list item
 	protected final int LIST_PADDING = 10;
 	
-	//实例化一个矩形
+	//rect of the menu
 	private Rect mRect = new Rect();
 	
-	//坐标的位置（x、y）
+	//params :position of the popup menu
 	private final int[] mLocation = new int[2];
-	
-	//屏幕的宽度和高度
 	private int mScreenWidth,mScreenHeight;
-
-	//判断是否需要添加或更新列表子类项
 	private boolean mIsDirty;
-	
-	//位置不在中心
 	private int popupGravity = Gravity.NO_GRAVITY;	
 	
-	//弹窗子类项选中时的监听
+	//listener of menu item
 	private OnItemOnClickListener mItemOnClickListener;
 	
-	//定义列表对象
+	//menu item list
 	private ListView mListView;
 	
-	//定义弹窗子类项列表
+	//menu item
 	private ArrayList<ActionItem> mActionItems = new ArrayList<ActionItem>();			
 	
 	public TitlePopup(Context context){
-		//设置布局的参数
+		//set layout params
 		this(context, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 	}
 	
 	public TitlePopup(Context context, int width, int height){
 		this.mContext = context;
 		
-		//设置可以获得焦点
 		setFocusable(true);
-		//设置弹窗内可点击
 		setTouchable(true);	
-		//设置弹窗外可点击
 		setOutsideTouchable(true);
 		
-		//获得屏幕的宽度和高度
+		//get screen params 
 		mScreenWidth = Util.getScreenWidth(mContext);
 		mScreenHeight = Util.getScreenHeight(mContext);
 		
-		//设置弹窗的宽度和高度
+		//set popup window position
 		setWidth(width);
 		setHeight(height);
 		
 		setBackgroundDrawable(new BitmapDrawable());
 		
-		//设置弹窗的布局界面
+		//set popup window layout
 		setContentView(LayoutInflater.from(mContext).inflate(R.layout.title_popup, null));
 		
 		initUI();
 	}
 		
 	/**
-	 * 初始化弹窗列表
+	 * initial menu item
 	 */
 	private void initUI(){
 		mListView = (ListView) getContentView().findViewById(R.id.title_list);
@@ -91,7 +83,6 @@ public class TitlePopup extends PopupWindow {
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int index,long arg3) {
-				//点击子类项后，弹窗消失
 				dismiss();
 				
 				if(mItemOnClickListener != null)
@@ -101,47 +92,39 @@ public class TitlePopup extends PopupWindow {
 	}
 	
 	/**
-	 * for menu
+	 * show global menu
 	 */
 	public void show(View view){
-		//获得点击屏幕的位置坐标
 		view.getLocationOnScreen(mLocation);
 		
-		//设置矩形的大小
 		mRect.set(mLocation[0], mLocation[1], mLocation[0] + view.getWidth(),mLocation[1] + view.getHeight());
 		
-		//判断是否需要添加或更新列表子类项
 		if(mIsDirty){
 			populateActions();
 		}
 		
-		//显示弹窗的位置
 		showAtLocation(view, popupGravity, mScreenWidth - LIST_PADDING - (getWidth()/2), mRect.bottom);
 	}
-	//for item
+	/**
+	 * show item menu
+	 */
 	public void show(View view,long y){
-		//获得点击屏幕的位置坐标
 		view.getLocationOnScreen(mLocation);
 		
-		//设置矩形的大小
 		mRect.set(mLocation[0], mLocation[1], mLocation[0] + view.getWidth(),mLocation[1] + view.getHeight());
 		
-		//判断是否需要添加或更新列表子类项
 		if(mIsDirty){
 			populateActions();
 		}
-		
-		//显示弹窗的位置
 		showAtLocation(view, popupGravity, mScreenWidth/3 , mRect.centerY());
 	}
 	
 	/**
-	 * 设置弹窗列表子项
+	 * set menu item 
 	 */
 	private void populateActions(){
 		mIsDirty = false;
 		
-		//设置列表的适配器
 		mListView.setAdapter(new BaseAdapter() {			
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
@@ -151,11 +134,8 @@ public class TitlePopup extends PopupWindow {
 					textView = new TextView(mContext);
 					textView.setTextColor(mContext.getResources().getColor(android.R.color.white));
 					textView.setTextSize(14);
-					//设置文本居中
 					textView.setGravity(Gravity.CENTER);
-					//设置文本域的范围
 					textView.setPadding(0, 10, 0, 10);
-					//设置文本在一行内显示（不换行）
 					textView.setSingleLine(true);
 				}else{
 					textView = (TextView) convertView;
@@ -163,11 +143,8 @@ public class TitlePopup extends PopupWindow {
 				
 				ActionItem item = mActionItems.get(position);
 				
-				//设置文本文字
 				textView.setText(item.mTitle);
-				//设置文字与图标的间隔
 				textView.setCompoundDrawablePadding(10);
-				//设置在文字的左边放一个图标
                 textView.setCompoundDrawablesWithIntrinsicBounds(item.mDrawable, null , null, null);
 				
                 return textView;
@@ -190,9 +167,6 @@ public class TitlePopup extends PopupWindow {
 		}) ;
 	}
 	
-	/**
-	 * 添加子类项
-	 */
 	public void addAction(ActionItem action){
 		if(action != null){
 			mActionItems.add(action);
@@ -200,9 +174,6 @@ public class TitlePopup extends PopupWindow {
 		}
 	}
 	
-	/**
-	 * 清除子类项
-	 */
 	public void cleanAction(){
 		if(mActionItems.isEmpty()){
 			mActionItems.clear();
@@ -210,9 +181,6 @@ public class TitlePopup extends PopupWindow {
 		}
 	}
 	
-	/**
-	 * 根据位置得到子类项
-	 */
 	public ActionItem getAction(int position){
 		if(position < 0 || position > mActionItems.size())
 			return null;
@@ -220,15 +188,15 @@ public class TitlePopup extends PopupWindow {
 	}			
 	
 	/**
-	 * 设置监听事件
+	 * set menu item listener
 	 */
 	public void setItemOnClickListener(OnItemOnClickListener onItemOnClickListener){
 		this.mItemOnClickListener = onItemOnClickListener;
 	}
 	
 	/**
-	 * @author yangyu
-	 *	功能描述：弹窗子类项按钮监听事件
+	 * @author xiang
+	 *	set menu item listener interface
 	 */
 	public static interface OnItemOnClickListener{
 		public void onItemClick(ActionItem item , int position);

@@ -11,9 +11,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * 数据库服务类
- * 包含查询修改删除联系人等方法
- * @author HH
+ * database services 
+ * include add/del/edit contacts in db
+ * @author xiang
  *
  */
 public class DBServices {

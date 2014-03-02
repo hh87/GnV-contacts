@@ -1,8 +1,8 @@
 package com.xiang.mycontacts;
 
 /**
- * 创建数据库中表的sql语句
- * @author HH
+ * sql string to build table in db
+ * @author xiang
  *	
  */
 public class DBhelperCreateString {

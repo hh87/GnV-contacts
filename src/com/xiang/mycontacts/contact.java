@@ -1,8 +1,8 @@
 package com.xiang.mycontacts;
 
 /**
- * 联系人数据类
- * @author HH
+ * data model of the contact
+ * @author xiang
  * 
  */
 public class contact {

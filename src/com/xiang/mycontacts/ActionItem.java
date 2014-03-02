@@ -4,8 +4,8 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 /**
- * 下拉列表项
- * @author HH
+ * the menu item
+ * @author xiang
  *
  */
 public class ActionItem {

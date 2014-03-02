@@ -6,8 +6,8 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * 数据库建立，继承自SQLiteOpenHelper
- * @author HH
+ * build the database extends SQLiteOpenHelper
+ * @author xiang
  *
  */
 public class DBhelper extends SQLiteOpenHelper{
