@@ -6,13 +6,13 @@
     <string name="hello_world">Hello world!</string>
 	<string name="Unrecognizegesture">Unrecognize gesture!!</string>
 	<string name="startspeaking">Start Speaking!</string>
-	<string name="novoicedev">请安装google voice search后再试！</string>
+	<string name="novoicedev">Please retry after install google voice search!</string>
 	<string name="done">Done</string>
 	<string name="cancel">Cancel</string>
 	<string name="newcontact">New Contact</string>
 	<string name="editcontact">Edit Contact</string>
 	<string name="deleteconfirm">Delete Confirm</string>
-	<string name="ok">ok</string>
+	<string name="ok">OK</string>
 	<string name="nocontacts">No contacts</string>
 
 </resources>
