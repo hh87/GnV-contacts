@@ -14,15 +14,15 @@
             android:id="@+id/add_and_edit_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"/>
+            android:text="TextView" />
 
         <EditText
             android:id="@+id/name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" 
-            android:lines="1"
+            android:layout_height="wrap_content"
+            android:ems="10"
             android:hint="John Dow"
-            android:ems="10" >
+            android:lines="1" >
 
             <requestFocus />
         </EditText>
@@ -31,10 +31,10 @@
             android:id="@+id/phonenumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lines="1"
-            android:hint="555555555"
             android:ems="10"
-            android:inputType="phone" />
+            android:hint="555555555"
+            android:inputType="phone"
+            android:lines="1" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -98,7 +98,10 @@ public class MainActivity extends Activity {
 					case 1:
 						LayoutInflater factory = LayoutInflater.from(MainActivity.this);
 	                    final View view = factory.inflate(R.layout.gesture_input, null);
-	                    final AlertDialog ad = new AlertDialog.Builder(MainActivity.this).setView(view).create();
+	                    final AlertDialog ad = new AlertDialog.Builder(MainActivity.this)
+	                    		.setView(view)
+	                    		.create();
+	                    
 	                    ad.show();
 	                    Log.i("button", "Gesture Mod!");
 	                    GestureOverlayView gov = (GestureOverlayView)view.findViewById(R.id.gesture);  
@@ -256,7 +259,7 @@ public class MainActivity extends Activity {
 	    	LayoutInflater factory = LayoutInflater.from(MainActivity.this);
             final View view = factory.inflate(R.layout.add_and_edit, null);
             
-            new AlertDialog.Builder(MainActivity.this)
+            final AlertDialog ad = new AlertDialog.Builder(MainActivity.this)
             .setView(view).setPositiveButton(getResources().getString(R.string.done), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog,
@@ -265,12 +268,25 @@ public class MainActivity extends Activity {
 					
 					newcontacter.setName(((EditText)view.findViewById(R.id.name)).getText().toString());
 					newcontacter.setPhonenumber(((EditText)view.findViewById(R.id.phonenumber)).getText().toString());
-					db.addContacter(newcontacter);
-					refreshlistview();
+					if(newcontacter.getName().isEmpty() || newcontacter.getPhonenumber().isEmpty()){
+						
+					}else{
+						db.addContacter(newcontacter);
+						refreshlistview();
+					}
 				}
 			})
 			.setNegativeButton(getResources().getString(R.string.cancel), null)
-			.create().show();
+			.create();
+            ad.show();
+	    	ad.getButton(AlertDialog.BUTTON_POSITIVE).
+	    	setCompoundDrawablesWithIntrinsicBounds(null, 
+	    			getResources().getDrawable(R.drawable.ic_cab_done_holo_dark),
+	    			null, null);
+	    	ad.getButton(AlertDialog.BUTTON_NEGATIVE).
+	    	setCompoundDrawablesWithIntrinsicBounds(null, 
+	    			getResources().getDrawable(R.drawable.ic_menu_close_clear_cancel),
+	    			null, null);
 			((TextView)view.findViewById(R.id.add_and_edit_title)).setText(getResources().getString(R.string.newcontact));
 	    }
 	    
@@ -282,7 +298,7 @@ public class MainActivity extends Activity {
             final View view = factory.inflate(R.layout.add_and_edit, null);
             ((EditText)view.findViewById(R.id.name)).setText(((contact)contactsList.get((int)selectItem)).getName());
             ((EditText)view.findViewById(R.id.phonenumber)).setText(((contact)contactsList.get((int)selectItem)).getPhonenumber());
-            new AlertDialog.Builder(MainActivity.this)
+            final AlertDialog ad = new AlertDialog.Builder(MainActivity.this)
             .setView(view).setPositiveButton(getResources().getString(R.string.done), new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog,
@@ -292,19 +308,30 @@ public class MainActivity extends Activity {
 					newcontacter.setName(((EditText)view.findViewById(R.id.name)).getText().toString());
 					newcontacter.setId(((contact)contactsList.get((int)selectItem)).getId());
 					newcontacter.setPhonenumber(((EditText)view.findViewById(R.id.phonenumber)).getText().toString());
-					db.editContacter(newcontacter);
-					refreshlistview();
+					if(newcontacter.getName().isEmpty() || newcontacter.getPhonenumber().isEmpty()){
+						
+					}else{
+						db.editContacter(newcontacter);
+						refreshlistview();
+					}
 				}
 			})
 			.setNegativeButton(getResources().getString(R.string.cancel), null)
-			.create().show();
-			((TextView)view.findViewById(R.id.add_and_edit_title)).setText(getResources().getString(R.string.editcontact));
-	    }
+			.create();
+			ad.show();
+	    	ad.getButton(AlertDialog.BUTTON_POSITIVE).
+	    	setCompoundDrawablesWithIntrinsicBounds(null, 
+	    			getResources().getDrawable(R.drawable.ic_cab_done_holo_dark),
+	    			null, null);
+	    	ad.getButton(AlertDialog.BUTTON_NEGATIVE).
+	    	setCompoundDrawablesWithIntrinsicBounds(null, 
+	    			getResources().getDrawable(R.drawable.ic_menu_close_clear_cancel),
+	    			null, null);}
 	    /**
 	     * method :delete contact
 	     */
 	    private void contactDel(){
-	    	new AlertDialog.Builder(MainActivity.this)
+	    	final AlertDialog ad = new AlertDialog.Builder(MainActivity.this)
 	    	.setTitle(getResources().getString(R.string.deleteconfirm))
             .setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
 				@Override
@@ -315,7 +342,16 @@ public class MainActivity extends Activity {
 				}
 			})
 			.setNegativeButton(getResources().getString(R.string.cancel), null)
-			.create().show();
+			.create();
+	    	ad.show();
+	    	ad.getButton(AlertDialog.BUTTON_POSITIVE).
+	    	setCompoundDrawablesWithIntrinsicBounds(null, 
+	    			getResources().getDrawable(R.drawable.ic_cab_done_holo_dark),
+	    			null, null);
+	    	ad.getButton(AlertDialog.BUTTON_NEGATIVE).
+	    	setCompoundDrawablesWithIntrinsicBounds(null, 
+	    			getResources().getDrawable(R.drawable.ic_menu_close_clear_cancel),
+	    			null, null);
 	    }
 	    
 	    /**
